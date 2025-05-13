@@ -1,0 +1,54 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  // output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  password      String
+  projects      Project[] @relation("CreatedProjects")
+  memberships   Membership[]
+  createdAt     DateTime  @default(now())
+}
+
+model Project {
+  id            String    @id @default(cuid())
+  name          String
+  creator       User      @relation("CreatedProjects", fields: [creatorId], references: [id])
+  creatorId     String
+  tasks         Task[]
+  members       Membership[]
+  createdAt     DateTime   @default(now())
+}
+
+model Task {
+  id            String    @id   @default(cuid())
+  title         String
+  description   String?
+  status        String    @default("todo")    // todo, in-progress, done
+  project       Project   @relation(fields: [projectId], references: [id])
+  projectId     String
+  createdAt     DateTime  @default(now())
+}
+
+model Membership {
+  id            String    @id   @default(cuid())
+  user          User      @relation(fields: [userId], references: [id])
+  userId        String
+  project       Project   @relation(fields: [projectId], references: [id])
+  projectId     String
+  role          String    @default("member")    // member or admin
+}

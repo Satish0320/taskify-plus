@@ -1,0 +1,37 @@
+taskify-plus/
+│
+├── prisma/                   # Prisma schema & migration
+│   └── schema.prisma
+│
+├── src/
+│   ├── app/
+│   │   ├── layout.tsx
+│   │   ├── page.tsx         # Homepage (dashboard or login)
+│   │   ├── login/           # Login form (NextAuth)
+│   │   ├── register/        # Signup form
+│   │   ├── dashboard/       # Protected route with project/task boards
+│   │   └── api/             # Route handlers (Next.js App Router)
+│   │       ├── auth/        # NextAuth API
+│   │       ├── project/     # Create, list, delete projects
+│   │       ├── task/        # CRUD for tasks (with ws emit)
+│   │       └── websocket/   # (Optional) For WebSocket upgrade in API
+│   │
+│   ├── components/          # UI components
+│   │   ├── TaskCard.tsx
+│   │   ├── ProjectSidebar.tsx
+│   │   └── AuthForm.tsx
+│   │
+│   ├── lib/                 # Helper utils (auth, db, ws setup)
+│   │   ├── auth.ts
+│   │   ├── db.ts
+│   │   └── websocket.ts     # Server/client socket setup
+│   │
+│   ├── types/               # Shared types/interfaces
+│   │   └── index.ts
+│   └── styles/              # (Optional) global styles or Tailwind config
+│
+├── .env                     # DB, Stripe, Auth credentials
+├── tsconfig.json
+├── tailwind.config.ts
+├── next.config.js
+└── package.json
