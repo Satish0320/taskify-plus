@@ -65,11 +65,12 @@ import Link from "next/link";
 
 export default async function DashboardPage() {
   const projects = await getuserprojects();
+  // const {data:session} = useSession()
 
   return (
     <div className="min-h-screen p-6 bg-gray-100 text-black">
       <div className="max-w-4xl mx-auto space-y-6">
-        <h1 className="text-2xl font-bold">Your Projects</h1>
+        <h1 className="text-2xl font-bold"> Your Projects</h1>
 
         <Link
           href="#"
