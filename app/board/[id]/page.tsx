@@ -14,6 +14,11 @@ export default async function BoardPage({ params }: { params: { id: string } }) 
                 orderBy: {
                     createdAt: "desc"
                 }
+            },
+            members:{
+                include:{
+                    user:true
+                }
             }
         }
     });

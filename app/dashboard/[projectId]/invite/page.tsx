@@ -26,6 +26,7 @@ export default function InvitePage({params}:{params:{projectId: string}}){
             setEmail("")
             setRole("")
             route.refresh()
+            route.push("/dashboard")
         }
     }
 

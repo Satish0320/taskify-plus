@@ -34,7 +34,7 @@ export default function CreateProjectForm({ onClose }: { onClose: () => void }) 
 
     return (
         <div className="p-4 bg-white rounded shadow w-full max-w-sm">
-            <h3 className="text-lg font-bold mb-2">Create New Project</h3>
+            <h3 className="text-lg font-bold mb-2 text-black">Create New Project</h3>
             <input
                 value={name}
                 onChange={(e) => setname(e.target.value)}
