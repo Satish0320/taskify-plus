@@ -7,7 +7,7 @@ import { useState } from "react";
 export default function TaskCard({
     task
 }: {
-    task: { id: string, title: string, description: string | null, status: string }
+    task: { id: string, title: string, description: string | null, status: string, assignee: string }
 }) {
     const [status, setStatus] = useState(task.status)
     const [title, setTitle] = useState(task.title)
@@ -28,18 +28,18 @@ export default function TaskCard({
         router.refresh()
     }
 
-    const handleUpdate =async () => {
-        await fetch (`/api/task/${task.id}`,{
-            method:"PATCH",
-            body: JSON.stringify({title,description}),
-            headers: {"Content-Type":"application/json"}
+    const handleUpdate = async () => {
+        await fetch(`/api/task/${task.id}`, {
+            method: "PATCH",
+            body: JSON.stringify({ title, description }),
+            headers: { "Content-Type": "application/json" }
         });
         setIsEditing(false);
         router.refresh()
     }
 
-    const handleDelete =async () => {
-        await fetch(`/api/task/${task.id}`,{method:"DELETE"})
+    const handleDelete = async () => {
+        await fetch(`/api/task/${task.id}`, { method: "DELETE" })
         router.refresh()
     }
 
@@ -63,13 +63,18 @@ export default function TaskCard({
                 </>
             ) : (
                 <>
+                    {task.assignee && (
+                        <p className="text-sm text-black font-extrabold">Assigned To:  {task.assignee.name} </p>
+                    )}
                     <div className="flex justify-between">
+
                         <h3 className="font-semibold"> {task.title} </h3>
                         <div className="flex gap-2 text-sm">
                             <button onClick={() => setIsEditing(true)} className="text-blue-600">Edit</button>
                             <button onClick={handleDelete} className="text-red-600">Delete</button>
                         </div>
                     </div>
+
                     <p className="text-sm text-gray-600"> {task.description} </p>
                 </>
             )}

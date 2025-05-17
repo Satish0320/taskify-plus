@@ -11,7 +11,7 @@ export  async function POST(req: NextRequest) {
     }
 
     const body = await req.json();
-    const { title, description, projectId } = body;
+    const { title, description, projectId,assigneeId } = body;
 
     if (!title || !projectId) {
         return NextResponse.json({ error: "Missing fields" }, { status: 400 });
@@ -21,7 +21,8 @@ export  async function POST(req: NextRequest) {
         data:{
             title,
             description,
-            projectId
+            projectId,
+            assigneeId: assigneeId || null
         }
     })
     return NextResponse.json(task,{status:201})
